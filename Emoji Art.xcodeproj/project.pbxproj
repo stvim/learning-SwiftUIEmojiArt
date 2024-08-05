@@ -104,11 +104,11 @@
 		B0AA465B2C5CCF2F00D66CE4 /* Emoji Art */ = {
 			isa = PBXGroup;
 			children = (
-				B0AA468F2C5CD6EC00D66CE4 /* View */,
 				B0AA468B2C5CD51E00D66CE4 /* Model */,
 				B0AA468A2C5CD51300D66CE4 /* ViewModel */,
-				B0AA465C2C5CCF2F00D66CE4 /* Emoji_ArtApp.swift */,
+				B0AA468F2C5CD6EC00D66CE4 /* View */,
 				B0AA465E2C5CCF2F00D66CE4 /* ContentView.swift */,
+				B0AA465C2C5CCF2F00D66CE4 /* Emoji_ArtApp.swift */,
 				B0AA46902C5CD97E00D66CE4 /* Extensions.swift */,
 				B0AA46602C5CCF3000D66CE4 /* Assets.xcassets */,
 				B0AA46622C5CCF3000D66CE4 /* Preview Content */,
