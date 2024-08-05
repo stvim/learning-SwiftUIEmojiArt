@@ -11,7 +11,8 @@ struct EmojiArtDocumentView: View {
     typealias Emoji = EmojiArt.Emoji
     
     @ObservedObject var document: EmojiArtDocument
-
+    @EnvironmentObject var paletteStore : PaletteStore
+    
     private let emojis = "🤡💩👻💀💼🧣🧤💦🍋🍅🧅🥨🫑🥭🍑🎳🎯🎹🎼🏵️🏆🚇🚆🚜🎢🏘️🏝️🚝🚚🧨🧰⛓️‍💥🧿🛁"
     
     private let paletteEmojiSize: CGFloat = 40
@@ -19,7 +20,8 @@ struct EmojiArtDocumentView: View {
     var body: some View {
         VStack {
             documentBody
-            ScrollingEmojis(emojis)
+//            ScrollingEmojis(emojis)
+            PaletteChooser()
                 .font(.system(size: paletteEmojiSize))
                 .padding(.horizontal)
                 .scrollIndicators(.hidden)
@@ -102,24 +104,6 @@ struct EmojiArtDocumentView: View {
     }
 }
 
-struct ScrollingEmojis: View {
-    let emojis: [String]
-    
-    init(_ emojis: String) {
-        self.emojis = emojis.uniqued.map(String.init)
-    }
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(emojis, id: \.self) { emoji in
-                    Text(emoji)
-                        .draggable(emoji)
-                }
-            }
-        }
-    }
-}
 
 //struct EmojiArtDocumentView_Previews : PreviewProvider {
 //    static var previews: some View {
@@ -129,4 +113,5 @@ struct ScrollingEmojis: View {
 //}
 #Preview {
     EmojiArtDocumentView(document: EmojiArtDocument())
+        .environmentObject(PaletteStore(name: "Preview"))
 }
