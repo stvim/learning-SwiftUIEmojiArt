@@ -7,15 +7,16 @@
 
 import Foundation
 
-struct Palette: Identifiable {
+struct Palette: Identifiable, Codable {
     var name: String
     var emojis: String
-    let id = UUID()
+    var id = UUID()
     
-    static let builtins = [
+    static var builtins : [Palette] { [
         Palette(name: "test1", emojis: "🎹🎼🏵️🏆🚇🚆🚜🎢🏘️🏝️🚝🚚🧨🧰⛓️‍💥🧿🛁")
         , Palette(name: "test2", emojis: "🤡💩👻💀💼🧣🧤💦🍋🍅🧅🥨🫑🥭🍑🎳🎯")
     ]
+    }
 }
 
     
