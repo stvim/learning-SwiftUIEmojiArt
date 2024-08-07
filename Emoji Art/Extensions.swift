@@ -43,6 +43,10 @@ extension String {
             }
         }
     }
+    
+    mutating func removeAll(_ substring:String) {
+        self = replacingOccurrences(of: substring, with: "")
+    }
 }
 
 

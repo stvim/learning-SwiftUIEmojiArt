@@ -33,7 +33,8 @@ struct PaletteChooser: View {
         .contextMenu{
             gotoMenu
             AnimatedActionButton("New", systemImage: "plus") {
-                store.insert(name: "Math", emojis: "+-x/")
+                store.insert(name: "", emojis: "")
+                showPaletteEditor = true
             }
             AnimatedActionButton("Delete", systemImage: "minus.circle", role: .destructive) {
                 store.palettes.remove(at: store.cursorIndex)
