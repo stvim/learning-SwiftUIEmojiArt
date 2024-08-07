@@ -22,6 +22,7 @@
 		B0AA46952C61291D00D66CE4 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AA46942C61291D00D66CE4 /* Palette.swift */; };
 		B0AA46972C612C2E00D66CE4 /* PaletteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AA46962C612C2E00D66CE4 /* PaletteStore.swift */; };
 		B0AA46992C6195D600D66CE4 /* PaletteChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AA46982C6195D600D66CE4 /* PaletteChooser.swift */; };
+		B0AA469B2C6388EE00D66CE4 /* PaletteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AA469A2C6388EE00D66CE4 /* PaletteEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		B0AA46942C61291D00D66CE4 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		B0AA46962C612C2E00D66CE4 /* PaletteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteStore.swift; sourceTree = "<group>"; };
 		B0AA46982C6195D600D66CE4 /* PaletteChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteChooser.swift; sourceTree = "<group>"; };
+		B0AA469A2C6388EE00D66CE4 /* PaletteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteEditor.swift; path = "Emoji Art/View/PaletteEditor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		B0AA46502C5CCF2F00D66CE4 = {
 			isa = PBXGroup;
 			children = (
+				B0AA469A2C6388EE00D66CE4 /* PaletteEditor.swift */,
 				B0AA465B2C5CCF2F00D66CE4 /* Emoji Art */,
 				B0AA466C2C5CCF3000D66CE4 /* Emoji ArtTests */,
 				B0AA46762C5CCF3000D66CE4 /* Emoji ArtUITests */,
@@ -311,6 +314,7 @@
 				B0AA46872C5CD40D00D66CE4 /* EmojiArt.swift in Sources */,
 				B0AA46972C612C2E00D66CE4 /* PaletteStore.swift in Sources */,
 				B0AA465F2C5CCF2F00D66CE4 /* ContentView.swift in Sources */,
+				B0AA469B2C6388EE00D66CE4 /* PaletteEditor.swift in Sources */,
 				B0AA465D2C5CCF2F00D66CE4 /* Emoji_ArtApp.swift in Sources */,
 				B0AA46892C5CD50300D66CE4 /* EmojiArtDocument.swift in Sources */,
 				B0AA46952C61291D00D66CE4 /* Palette.swift in Sources */,
