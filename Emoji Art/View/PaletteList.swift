@@ -29,6 +29,47 @@ struct PaletteList: View {
     }
 }
 
+struct EditablePaletteList: View {
+    @EnvironmentObject var store: PaletteStore
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(store.palettes) { palette in
+                    NavigationLink(value: palette) {
+                        VStack(alignment: .leading) {
+                            Text(palette.name)
+                            Text(palette.emojis).lineLimit(1)
+                        }
+                    }
+                }
+                .onDelete(perform: { indexSet in
+                    withAnimation {
+                        store.palettes.remove(atOffsets: indexSet)
+                    }
+                })
+                .onMove(perform: { indices, newOffset in
+                    store.palettes.move(fromOffsets: indices, toOffset: newOffset)
+                })
+            }
+            .navigationDestination(for: Palette.self ) {
+                palette in
+                if let paletteIndex = store.palettes.firstIndex(where: { $0.id == palette.id }) {
+                    PaletteEditor(palette: $store.palettes[paletteIndex])
+                }
+            }
+            .navigationTitle("\(store.name) Palettes")
+            .toolbar {
+                Button {
+                    store.insert(name: "", emojis: "")
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
+    }
+}
+
 struct PaletteView: View {
     let palette: Palette
     

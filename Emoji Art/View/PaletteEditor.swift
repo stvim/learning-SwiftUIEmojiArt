@@ -19,7 +19,6 @@ struct PaletteEditor: View {
     var emojiFont = Font.system(size: 40)
     
     var body: some View {
-        Text("Palette Editor")
         Form {
             Section(header: Text("Name")) {
                 TextField("Name", text: $palette.name)
