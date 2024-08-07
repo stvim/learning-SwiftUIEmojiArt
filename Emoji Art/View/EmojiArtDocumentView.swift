@@ -83,6 +83,7 @@ struct EmojiArtDocumentView: View {
             }
         }
             .position(Emoji.Position.zero.in(geometry))
+        
         ForEach(document.emojis) { emoji in
             Text(emoji.string)
                 .font(emoji.font)
