@@ -68,6 +68,13 @@ struct PaletteEditor: View {
     }
 }
 
-//#Preview {
-//    PaletteEditor(palette: Palette.builtins.first!)
-//}
+fileprivate struct Preview: View {
+    @State private var palette = PaletteStore(name: "Preview").palettes.first!
+    var body: some View {
+        PaletteEditor(palette: $palette)
+    }
+}
+
+#Preview {
+    Preview()
+}
