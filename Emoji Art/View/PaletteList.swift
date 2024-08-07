@@ -31,6 +31,7 @@ struct PaletteList: View {
 
 struct EditablePaletteList: View {
     @EnvironmentObject var store: PaletteStore
+    @State private var showCursorPalette = false
     
     var body: some View {
         NavigationStack {
@@ -58,10 +59,14 @@ struct EditablePaletteList: View {
                     PaletteEditor(palette: $store.palettes[paletteIndex])
                 }
             }
+            .navigationDestination(isPresented: $showCursorPalette) {
+                PaletteEditor(palette: $store.palettes[store.cursorIndex])
+            }
             .navigationTitle("\(store.name) Palettes")
             .toolbar {
                 Button {
                     store.insert(name: "", emojis: "")
+                    showCursorPalette = true
                 } label: {
                     Image(systemName: "plus")
                 }
