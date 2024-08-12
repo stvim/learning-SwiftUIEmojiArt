@@ -30,7 +30,7 @@ struct PaletteList: View {
 }
 
 struct EditablePaletteList: View {
-    @EnvironmentObject var store: PaletteStore
+    @ObservedObject var store: PaletteStore
     @State private var showCursorPalette = false
     
     var body: some View {

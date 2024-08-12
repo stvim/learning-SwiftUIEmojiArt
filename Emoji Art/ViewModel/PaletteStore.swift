@@ -24,6 +24,21 @@ extension UserDefaults {
         }
     }
 }
+
+extension PaletteStore : Identifiable {
+    var id: String { name }
+}
+
+extension PaletteStore : Hashable {
+    static func == (lhs: PaletteStore, rhs: PaletteStore) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+}
+
 class PaletteStore: ObservableObject {
     let name: String
     
