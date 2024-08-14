@@ -104,6 +104,15 @@ enum UrlImage {
         }
     }
     
+    var failure : String? {
+        switch(self) {
+            case .failed(let errorMessage):
+                return errorMessage
+            default:
+                return nil
+        }
+    }
+    
     static func fetchUIImage(from url:URL) async throws -> UIImage {
         let (data, response) = try await URLSession.shared.data(from: url)
         if let uiImage = UIImage(data: data) {

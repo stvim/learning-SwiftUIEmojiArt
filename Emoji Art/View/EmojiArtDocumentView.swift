@@ -13,6 +13,8 @@ struct EmojiArtDocumentView: View {
     @ObservedObject var document: EmojiArtDocument
     @EnvironmentObject var paletteStore : PaletteStore
     
+    @State private var ShowFailureAlert = false
+    
     private let emojis = "🤡💩👻💀💼🧣🧤💦🍋🍅🧅🥨🫑🥭🍑🎳🎯🎹🎼🏵️🏆🚇🚆🚜🎢🏘️🏝️🚝🚚🧨🧰⛓️‍💥🧿🛁"
     
     private let paletteEmojiSize: CGFloat = 40
@@ -40,6 +42,17 @@ struct EmojiArtDocumentView: View {
             .dropDestination(for: Sturldata.self) { sturldatas, location in
                 return drop(sturldatas, at: location, in: geometry)
             }
+            .onChange(of: document.background.failure) {
+                ShowFailureAlert = (document.background.failure != nil)
+            }
+            .alert("Error"
+                   , isPresented: $ShowFailureAlert
+                   , presenting: document.background.failure
+                   , actions: { _ in
+                Button("OK", role: .cancel) { }
+            }
+                   , message: { failure in Text(failure) }
+            )
         }
     }
     
