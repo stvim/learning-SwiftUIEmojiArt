@@ -70,20 +70,26 @@ struct EmojiArtDocumentView: View {
     
     @ViewBuilder
     private func documentContents(in geometry: GeometryProxy) -> some View {
-        AsyncImage(url: document.background) {
-            phase in
-            if let image = phase.image {
-                image
-            } else if let url = document.background {
-                if phase.error != nil {
-                    Text( "\(url)")
-                } else {
-                    ProgressView()
-                }
-            }
-        }
-            .position(Emoji.Position.zero.in(geometry))
+        documentBackground(in: geometry)
         
+        documentsEmojis(in: geometry)
+    }
+    
+    @ViewBuilder
+    private func documentBackground(in geometry: GeometryProxy) -> some View {
+        if document.background.isFetching {
+            ProgressView()
+                .scaleEffect(2)
+                .tint(.blue)
+                .position(Emoji.Position.zero.in(geometry))
+        }
+        if let uiImage = document.background.uiImage {
+            Image(uiImage: uiImage)
+                .position(Emoji.Position.zero.in(geometry))
+        }
+    }
+    @ViewBuilder
+    private func documentsEmojis(in geometry: GeometryProxy) -> some View {
         ForEach(document.emojis) { emoji in
             Text(emoji.string)
                 .font(emoji.font)

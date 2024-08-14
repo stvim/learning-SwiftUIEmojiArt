@@ -13,6 +13,11 @@ class EmojiArtDocument: ObservableObject {
     @Published private var emojiArt = EmojiArt() {
         didSet {
             autosave()
+            if emojiArt.background != oldValue.background {
+                Task {
+                    await fetchBackgroundImage()
+                }
+            }
         }
     }
     
@@ -44,9 +49,7 @@ class EmojiArtDocument: ObservableObject {
         emojiArt.emojis
     }
     
-    var background: URL? {
-        emojiArt.background
-    }
+    @Published var background: UrlImage = .none
     
     // MARK: - Intent(s)
     
@@ -57,8 +60,62 @@ class EmojiArtDocument: ObservableObject {
     func addEmoji(_ emoji: String, at position:Emoji.Position, size: CGFloat) {
         emojiArt.addEmoji(emoji, at: position, size: Int(size))
     }
+    
+    // MARK: - Background fetching
+    @MainActor
+    private func fetchBackgroundImage() async {
+        if let url = emojiArt.background {
+            background = .fetching(url)
+            do {
+                let uiImage = try await UrlImage.fetchUIImage(from: url)
+                if url == emojiArt.background {
+                    background = .found(uiImage)
+                }
+            } catch let error {
+                background = .failed("Error fetching background: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
 }
 
+enum UrlImage {
+    case none
+    case fetching(URL)
+    case found(UIImage)
+    case failed(String)
+    
+    var uiImage : UIImage? {
+        switch(self) {
+            case .found(let uiImage):
+                return uiImage
+            default:
+                return nil
+        }
+    }
+    
+    var isFetching : Bool {
+        switch(self) {
+            case .fetching(_):
+                return true
+            default:
+                return false
+        }
+    }
+    
+    static func fetchUIImage(from url:URL) async throws -> UIImage {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        if let uiImage = UIImage(data: data) {
+            return uiImage
+        } else {
+            throw Err.WrongImageData
+        }
+    }
+    enum Err : Error {
+        case WrongImageData
+    }
+}
 
 
 extension EmojiArt.Emoji {
